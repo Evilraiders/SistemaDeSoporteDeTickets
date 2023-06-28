@@ -21,7 +21,7 @@
                         {{Session::get('success')}}
                     </div>
                     @endif
-                    <form action="{{ route('register') }}" method="POST">
+                    <form action="{{ route('registerPost') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre</label>
@@ -52,7 +52,7 @@
                     </form>
 
                     <div class="mt-3">
-                        <a href="{{ url('/UserAdmin') }}">Volver</a>
+                        <a href="{{ url('login') }}">Volver</a>
                     </div>
                 </div>
             </div>

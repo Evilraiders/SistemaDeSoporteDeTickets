@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -45,7 +46,7 @@ class UserAdminController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
@@ -59,8 +60,14 @@ class UserAdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        try {
+            $user->delete();
+    
+            return back()->with('success', '¡Usuario eliminado exitosamente!');
+        } catch (\Throwable $th) {
+            return back()->with('error', 'Se produjo un error al eliminar el usuario.');
+        }
     }
 }

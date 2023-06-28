@@ -24,7 +24,7 @@
     
                     </li>
                 </ul>
-                <a href="{{ route('register') }}" class="btn btn-primary m-2">Registrar Usuario</a>
+                <a href="{{ route('admin.register') }}" class="btn btn-primary m-2">Registrar Usuario</a>
                 <form action="{{ route('logout') }}" method="POST" class="d-flex m-2" role="search">
                     @csrf
                     @method('DELETE')
@@ -36,18 +36,6 @@
     <div class="container">
         <h4>Gestión de Usuarios</h4>
         <div class="row">
-            <div class="col-xl-12">
-                <form action="">
-                    <div class="form-row">
-                        <div class="col-sm-4 my-1">
-                            <input type="text" class="form-control" name="texto">
-                        </div>
-                        <div class="col-auto my-1">
-                            <input type="submit" class="btn btn-primary" value="Buscar">
-                        </div>
-                    </div>
-                </form>
-            </div>
             <div class="col-xl-12">
                 <div class="table-responsive">
                     <table class="table table striped">
@@ -62,7 +50,13 @@
                         <tbody>
                         @foreach ($Users as $User)
                         <tr>
-                            <td>Eliminar</td>
+                            <td>
+                                <form action="{{route('user.destroy', $User)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">Eliminar</button>
+                                </form>
+                            </td>
                             <td>{{$User->name}}</td>
                             <td>{{$User->email}}</td>
                             <td>{{$User->Rol_ID}}</td>
